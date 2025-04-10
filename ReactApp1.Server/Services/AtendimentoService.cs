@@ -26,6 +26,7 @@ namespace GestaoHospitalar.Services
             });
         }
 
+
         public async Task<AtendimentoDto> CreateAsync(AtendimentoDto atendimentoDto)
         {
             var novoAtendimento = new Atendimento
@@ -34,6 +35,8 @@ namespace GestaoHospitalar.Services
                 DataAtendimento = atendimentoDto.DataAtendimento,
                 TipoAtendimento = atendimentoDto.TipoAtendimento
             };
+
+
 
             var atendimentoCriado = await _repository.AddAsync(novoAtendimento);
 
@@ -45,5 +48,11 @@ namespace GestaoHospitalar.Services
                 TipoAtendimento = atendimentoCriado.TipoAtendimento
             };
         }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            return await _repository.DeleteAsync(id);
+        }
+
     }
 }

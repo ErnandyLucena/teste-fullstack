@@ -1,7 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using GestaoHospitalar.Data;
+﻿using GestaoHospitalar.Data;
 using GestaoHospitalar.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GestaoHospitalar.Repositories
@@ -37,8 +38,25 @@ namespace GestaoHospitalar.Repositories
 
         public async Task AddAsync(Beneficiario beneficiario)
         {
-            _context.Beneficiarios.Add(beneficiario);
+            await _context.Beneficiarios.AddAsync(beneficiario);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateAsync(Beneficiario beneficiario)
+        {
+            _context.Beneficiarios.Update(beneficiario);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> DeletarAsync(int id)
+        {
+            var beneficiario = await _context.Beneficiarios.FindAsync(id);
+            if (beneficiario == null)
+                return false;
+
+            _context.Beneficiarios.Remove(beneficiario);
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

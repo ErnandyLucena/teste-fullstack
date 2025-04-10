@@ -33,5 +33,16 @@ namespace GestaoHospitalar.Controllers
             var atendimentoCriado = await _atendimentoService.CreateAsync(atendimentoDto);
             return CreatedAtAction(nameof(GetAll), new { id = atendimentoCriado.Id }, atendimentoCriado);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var sucesso = await _atendimentoService.DeleteAsync(id);
+            if (!sucesso)
+                return NotFound(new { mensagem = "Atendimento não encontrado." });
+
+            return NoContent();
+        }
+
     }
 }

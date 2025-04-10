@@ -22,6 +22,18 @@ namespace GestaoHospitalar.Repositories
                 .ToListAsync();
         }
 
+        public async Task<bool> DeleteAsync(int id)
+        {
+            var atendimento = await _context.Atendimentos.FindAsync(id);
+            if (atendimento == null)
+                return false;
+
+            _context.Atendimentos.Remove(atendimento);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+
         public async Task<Atendimento> AddAsync(Atendimento atendimento)
         {
             _context.Atendimentos.Add(atendimento);

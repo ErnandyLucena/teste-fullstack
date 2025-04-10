@@ -30,6 +30,20 @@ namespace GestaoHospitalar.Services
             });
         }
 
+        public async Task<BeneficiarioDto?> ObterBeneficiarioPorIdAsync(int id)
+        {
+            var beneficiario = await _repository.GetByIdAsync(id);
+            if (beneficiario == null) return null;
+
+            return new BeneficiarioDto
+            {
+                Id = beneficiario.Id,
+                Nome = beneficiario.Nome,
+                DataNascimento = beneficiario.DataNascimento,
+                Ativo = beneficiario.Ativo
+            };
+        }
+
         public async Task<object?> CalcularPontuacaoBeneficiarioAsync(int id)
         {
             var beneficiario = await _repository.GetByIdWithAtendimentosAsync(id);
@@ -74,6 +88,25 @@ namespace GestaoHospitalar.Services
             };
 
             await _repository.AddAsync(beneficiario);
+        }
+
+        public async Task<bool> AtualizarBeneficiarioAsync(int id, BeneficiarioDto dto)
+        {
+            var beneficiario = await _repository.GetByIdAsync(id);
+            if (beneficiario == null)
+                return false;
+
+            beneficiario.Nome = dto.Nome;
+            beneficiario.DataNascimento = dto.DataNascimento;
+            beneficiario.Ativo = dto.Ativo;
+
+            await _repository.UpdateAsync(beneficiario);
+            return true;
+        }
+
+        public async Task<bool> DeletarBeneficiarioAsync(int id)
+        {
+            return await _repository.DeletarAsync(id);
         }
 
         public bool ValidarCarteirinha(string carteirinha)

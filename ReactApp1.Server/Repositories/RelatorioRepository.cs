@@ -14,7 +14,7 @@ namespace GestaoHospitalar.Repositories
 
         public IEnumerable<object> GerarRelatorio()
         {
-            // Exemplo de relatório simples com Data e Tipo de Atendimento
+           
             var relatorio = _context.Atendimentos.Select(a => new
             {
                 Id = a.Id,

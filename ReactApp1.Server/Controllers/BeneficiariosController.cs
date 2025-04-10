@@ -48,5 +48,31 @@ namespace GestaoHospitalar.Controllers
             await _beneficiarioService.CriarBeneficiarioAsync(dto);
             return Ok(new { mensagem = "Beneficiário criado com sucesso." });
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Deletar(int id)
+        {
+            var sucesso = await _beneficiarioService.DeletarBeneficiarioAsync(id);
+            if (!sucesso)
+                return NotFound(new { mensagem = "Beneficiário não encontrado." });
+
+            return NoContent();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Atualizar(int id, [FromBody] BeneficiarioDto dto)
+        {
+            var sucesso = await _beneficiarioService.AtualizarBeneficiarioAsync(id, dto);
+
+            if (!sucesso)
+            {
+                return NotFound(new { mensagem = "Beneficiário não encontrado." });
+            }
+
+            return Ok(new { mensagem = "Beneficiário atualizado com sucesso." });
+        }
+
+
+
     }
 }
