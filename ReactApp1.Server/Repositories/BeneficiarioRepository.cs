@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SeuProjeto.Data;
-using SeuProjeto.Models;
+using GestaoHospitalar.Data;
+using GestaoHospitalar.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace SeuProjeto.Repositories
+namespace GestaoHospitalar.Repositories
 {
     public class BeneficiarioRepository
     {
@@ -19,6 +21,24 @@ namespace SeuProjeto.Repositories
                                  .Skip((page - 1) * pageSize)
                                  .Take(pageSize)
                                  .ToListAsync();
+        }
+
+        public async Task<Beneficiario?> GetByIdAsync(int id)
+        {
+            return await _context.Beneficiarios.FindAsync(id);
+        }
+
+        public async Task<Beneficiario?> GetByIdWithAtendimentosAsync(int id)
+        {
+            return await _context.Beneficiarios
+                                 .Include(b => b.Atendimentos)
+                                 .FirstOrDefaultAsync(b => b.Id == id);
+        }
+
+        public async Task AddAsync(Beneficiario beneficiario)
+        {
+            _context.Beneficiarios.Add(beneficiario);
+            await _context.SaveChangesAsync();
         }
     }
 }

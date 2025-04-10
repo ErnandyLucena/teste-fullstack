@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using SeuProjeto.Data;
+using GestaoHospitalar.Data;
 
 #nullable disable
 
@@ -25,7 +25,7 @@ namespace ReactApp1.Server.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("SeuProjeto.Models.Atendimento", b =>
+            modelBuilder.Entity("GestaoHospitalar.Models.Atendimento", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -50,7 +50,7 @@ namespace ReactApp1.Server.Migrations
                     b.ToTable("Atendimentos");
                 });
 
-            modelBuilder.Entity("SeuProjeto.Models.Beneficiario", b =>
+            modelBuilder.Entity("GestaoHospitalar.Models.Beneficiario", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -73,9 +73,9 @@ namespace ReactApp1.Server.Migrations
                     b.ToTable("Beneficiarios");
                 });
 
-            modelBuilder.Entity("SeuProjeto.Models.Atendimento", b =>
+            modelBuilder.Entity("GestaoHospitalar.Models.Atendimento", b =>
                 {
-                    b.HasOne("SeuProjeto.Models.Beneficiario", "Beneficiario")
+                    b.HasOne("GestaoHospitalar.Models.Beneficiario", "Beneficiario")
                         .WithMany("Atendimentos")
                         .HasForeignKey("BeneficiarioId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -84,7 +84,7 @@ namespace ReactApp1.Server.Migrations
                     b.Navigation("Beneficiario");
                 });
 
-            modelBuilder.Entity("SeuProjeto.Models.Beneficiario", b =>
+            modelBuilder.Entity("GestaoHospitalar.Models.Beneficiario", b =>
                 {
                     b.Navigation("Atendimentos");
                 });

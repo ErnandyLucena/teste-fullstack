@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SeuProjeto.Models;
+using GestaoHospitalar.Models;
 
-namespace SeuProjeto.Data
+namespace GestaoHospitalar.Data
 {
     public class AppDbContext : DbContext
     {
@@ -16,6 +16,7 @@ namespace SeuProjeto.Data
                 .HasMany(b => b.Atendimentos)
                 .WithOne(a => a.Beneficiario)
                 .HasForeignKey(a => a.BeneficiarioId);
+
         }
     }
 }

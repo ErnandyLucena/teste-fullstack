@@ -1,4 +1,4 @@
-﻿namespace SeuProjeto.Models
+﻿namespace GestaoHospitalar.Models
 {
     public class Beneficiario
     {

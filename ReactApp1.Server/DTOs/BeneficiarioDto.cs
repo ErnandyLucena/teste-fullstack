@@ -1,4 +1,4 @@
-﻿namespace SeuProjeto.DTOs // Troque "SeuProjeto" pelo nome do seu namespace principal
+﻿namespace GestaoHospitalar.DTOs 
 {
     public class BeneficiarioDto
     {

@@ -1,8 +1,12 @@
-﻿using SeuProjeto.Models;
-using SeuProjeto.Repositories;
-using SeuProjeto.DTOs; // Adiciona esse namespace
+﻿using GestaoHospitalar.Models;
+using GestaoHospitalar.Repositories;
+using GestaoHospitalar.DTOs;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
-namespace SeuProjeto.Services
+namespace GestaoHospitalar.Services
 {
     public class BeneficiarioService
     {
@@ -17,7 +21,6 @@ namespace SeuProjeto.Services
         {
             var beneficiarios = await _repository.GetPaginatedAsync(page, pageSize);
 
-            // Mapeia para DTO
             return beneficiarios.Select(b => new BeneficiarioDto
             {
                 Id = b.Id,
@@ -25,6 +28,58 @@ namespace SeuProjeto.Services
                 DataNascimento = b.DataNascimento,
                 Ativo = b.Ativo
             });
+        }
+
+        public async Task<object?> CalcularPontuacaoBeneficiarioAsync(int id)
+        {
+            var beneficiario = await _repository.GetByIdWithAtendimentosAsync(id);
+
+            if (beneficiario == null || beneficiario.Atendimentos == null)
+                return null;
+
+            int pontuacaoTotal = 0;
+
+            foreach (var atendimento in beneficiario.Atendimentos)
+            {
+                switch (atendimento.TipoAtendimento)
+                {
+                    case "Consulta":
+                        pontuacaoTotal += 10;
+                        break;
+                    case "Exame":
+                        pontuacaoTotal += 5;
+                        break;
+                    case "Internacao":
+                        pontuacaoTotal += 20;
+                        break;
+                }
+            }
+
+            return new
+            {
+                BeneficiarioId = beneficiario.Id,
+                Nome = beneficiario.Nome,
+                PontuacaoTotal = pontuacaoTotal,
+                QuantidadeAtendimentos = beneficiario.Atendimentos.Count
+            };
+        }
+
+        public async Task CriarBeneficiarioAsync(BeneficiarioDto dto)
+        {
+            var beneficiario = new Beneficiario
+            {
+                Nome = dto.Nome,
+                DataNascimento = dto.DataNascimento,
+                Ativo = dto.Ativo
+            };
+
+            await _repository.AddAsync(beneficiario);
+        }
+
+        public bool ValidarCarteirinha(string carteirinha)
+        {
+            var regex = new Regex(@"^[A-Z]{3}-\d{6}$");
+            return regex.IsMatch(carteirinha);
         }
     }
 }
