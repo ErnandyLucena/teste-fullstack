@@ -1,0 +1,296 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #fff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+  border-radius: 10px;
+  overflow: hidden;
+  font-family: "Segoe UI", sans-serif;
+  border: none;
+}
+
+thead {
+  background-color: #007a33;
+  color: #ffffff;
+}
+
+thead th {
+  padding: 15px;
+  text-align: center;
+  font-size: 0.9em;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #007a33;
+  border: none;
+}
+
+tbody tr {
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f3f3f3; 
+}
+
+tbody tr:hover {
+  background-color: #e2f3ec; 
+  transform: scale(1.01);
+}
+
+.visualizar-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.2s ease;
+}
+
+.visualizar-btn:hover {
+  color: #00a431;
+}
+
+.search-bar {
+  margin: 20px 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.search-bar input {
+  padding: 12px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  width: 500px;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.status-dot.ativo {
+  background-color: #16a34a; 
+}
+
+.status-dot.inativo {
+  background-color: #dc2626; 
+}
+
+.visualizar-btn {
+  background: none;
+  border: none;
+  color: #1e293b;
+  cursor: pointer;
+}
+
+.visualizar-btn:hover {
+  color: #2563eb;
+}
+
+
+
+tbody td {
+  padding: 16px;
+  text-align: center;
+  font-size: 0.95em;
+  color: #3a3a3a;
+  border: none;
+}
+
+td .action {
+  background-color: #00b050;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+td .action:hover {
+  background-color: #009344;
+}
+
+td .action svg {
+  vertical-align: middle;
+}
+
+td .badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  background-color: #007a33;
+  color: #fff;
+  font-size: 0.75em;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tbody tr {
+    display: block;
+    margin-bottom: 1em;
+    border-radius: 6px;
+    padding: 10px;
+    background-color: #fff;
+  }
+
+  tbody td {
+    display: block;
+    text-align: right;
+    font-size: 0.85em;
+    border: none;
+    padding: 8px 10px;
+  }
+
+  tbody td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #007a33;
+  }
+}
+
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-family: "Segoe UI", sans-serif;
+  font-weight: 500;
+}
+
+.pagination button {
+  padding: 8px;
+  margin: 0 10px;
+  background-color: #005335; 
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #00b050; 
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  color: #007a33;
+  font-size: 16px;
+}
+
+.dashboard span {
+  margin: 2em 0;
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.btn-more {
+  margin: 1.5em 0;
+  padding: 0.5em 1em;
+  background-color: #181c2e;
+  border: 0;
+  border-radius: 5px;
+  font-size: 1.1em;
+  color: #fff;
+}
+
+.dashboard span {
+  margin: 2em 0;
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.barra-acoes {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.input-pesquisa {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.btn-verificar {
+  padding: 10px 18px;
+  background-color: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-verificar:hover {
+  background-color: #1565c0;
+}
+
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+
+  table thead {
+    border: none;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: 0.6em;
+  }
+
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: 0.8em;
+    text-align: right;
+  }
+
+  table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}

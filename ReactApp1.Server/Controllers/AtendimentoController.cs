@@ -27,7 +27,7 @@ namespace GestaoHospitalar.Controllers
         {
             if (string.IsNullOrWhiteSpace(atendimentoDto.TipoAtendimento))
             {
-                return BadRequest(new { mensagem = "Tipo de atendimento é obrigatório." });
+                return BadRequest(new { mensagem = "Tipo de atendimento é obrigatórioo" });
             }
 
             var atendimentoCriado = await _atendimentoService.CreateAsync(atendimentoDto);
@@ -39,7 +39,7 @@ namespace GestaoHospitalar.Controllers
         {
             var sucesso = await _atendimentoService.DeleteAsync(id);
             if (!sucesso)
-                return NotFound(new { mensagem = "Atendimento não encontrado." });
+                return NotFound(new { mensagem = "Atendimento não encontrado" });
 
             return NoContent();
         }

@@ -42,11 +42,11 @@ namespace GestaoHospitalar.Controllers
         {
             if (!_beneficiarioService.ValidarCarteirinha(carteirinha))
             {
-                return BadRequest(new { mensagem = "Carteirinha inválida. Formato esperado: XXX-YYYYYY" });
+                return BadRequest(new { mensagem = "Carteirinha inválida... Formato esperado: XXX-YYYYYY" });
             }
 
             await _beneficiarioService.CriarBeneficiarioAsync(dto);
-            return Ok(new { mensagem = "Beneficiário criado com sucesso." });
+            return Ok(new { mensagem = "Beneficiário criado com sucesso!!" });
         }
 
         [HttpDelete("{id}")]
@@ -54,7 +54,7 @@ namespace GestaoHospitalar.Controllers
         {
             var sucesso = await _beneficiarioService.DeletarBeneficiarioAsync(id);
             if (!sucesso)
-                return NotFound(new { mensagem = "Beneficiário não encontrado." });
+                return NotFound(new { mensagem = "Beneficiário não encontrado" });
 
             return NoContent();
         }

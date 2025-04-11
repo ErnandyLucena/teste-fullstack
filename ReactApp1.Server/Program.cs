@@ -17,12 +17,23 @@ builder.Services.AddScoped<BeneficiarioService>();
 builder.Services.AddScoped<AtendimentoRepository>();
 builder.Services.AddScoped<AtendimentoService>();
 
-// 👇 Adicionando RelatorioRepository e RelatorioService
 builder.Services.AddScoped<RelatorioRepository>();
 builder.Services.AddScoped<RelatorioService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// ✅ Configuração do CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("PermitirFrontendLocal",
+        policy =>
+        {
+            policy.WithOrigins("https://localhost:42849") // origem do frontend
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
 
 var app = builder.Build();
 
@@ -33,8 +44,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// ✅ Ativando o CORS
+app.UseCors("PermitirFrontendLocal");
+
 app.UseHttpsRedirection();
 app.UseAuthorization();
+
 app.MapControllers();
 
 app.Run();
