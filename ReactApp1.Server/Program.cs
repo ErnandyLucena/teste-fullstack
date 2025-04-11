@@ -23,7 +23,6 @@ builder.Services.AddScoped<RelatorioService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// ✅ Configuração do CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("PermitirFrontendLocal",
